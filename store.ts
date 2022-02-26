@@ -6,7 +6,7 @@ import { reducer } from './reducer';
 
 let store: any;
 
-type InitialState = typeof initialState;
+export type InitialState = typeof initialState;
 type UseStoreState = typeof initializeStore extends (
   ...args: never
 ) => UseStore<infer T>
@@ -14,9 +14,11 @@ type UseStoreState = typeof initializeStore extends (
   : never;
 
 const initialState = {
-  lastUpdate: 0,
-  light: false,
-  count: 0,
+  product: {} as ShopifyBuy.Product,
+  products: [] as ShopifyBuy.Product[],
+  checkout: {} as ShopifyBuy.Cart,
+  isCartOpen: false,
+  isMenuOpen: false,
 };
 
 const zustandContext = createContext<UseStoreState>();
