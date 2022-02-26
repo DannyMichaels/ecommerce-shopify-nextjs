@@ -1,4 +1,4 @@
-import { useStore } from '../zustand-store/store';
+import { useStore } from '../store';
 import shallow from 'zustand/shallow';
 
 const useClock = () => {

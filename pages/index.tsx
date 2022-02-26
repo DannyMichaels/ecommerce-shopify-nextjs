@@ -2,7 +2,7 @@ import useInterval from '../hooks/useInterval';
 import Clock from '../components/clock';
 import Counter from '../components/counter';
 
-import { initializeStore, useStore } from '../zustand-store/store';
+import { initializeStore, useStore } from '../store';
 
 export default function Page() {
   const { tick } = useStore();

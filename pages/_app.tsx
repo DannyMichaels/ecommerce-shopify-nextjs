@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { useCreateStore, Provider } from '../zustand-store/store';
+import { useCreateStore, Provider } from '../store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const createStore = useCreateStore(pageProps.initialZustandState);
