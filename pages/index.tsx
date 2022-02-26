@@ -1,15 +1,19 @@
+import Link from 'next/link';
 import { fetchAllProducts } from '../services/products.services';
+import { ProductWithHandle } from '../shopify';
 import { useStore } from '../store';
 
 interface HomeProps {
-  products: ShopifyBuy.Product[];
+  products: ProductWithHandle[];
 }
 
 export default function Home({ products }: HomeProps) {
   return (
     <div>
       {products.map((product) => (
-        <p key={product.id}>{product.title}</p>
+        <Link key={product.id} href={`/products/${product.handle}`} passHref>
+          <p>{product.title}</p>
+        </Link>
       ))}
     </div>
   );

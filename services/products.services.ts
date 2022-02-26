@@ -11,3 +11,10 @@ export const fetchProductWithHandle = async (
   const oneProduct = await client.product.fetchByHandle(handle);
   return oneProduct;
 };
+
+export const fetchProductById = async (
+  productId: string
+): Promise<ShopifyBuy.Product> => {
+  const oneProduct = await client.product.fetch(productId);
+  return oneProduct;
+};
