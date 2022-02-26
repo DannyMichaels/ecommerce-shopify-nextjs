@@ -9,15 +9,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Provider createStore={createStore}>
-      <StoreHandler>
+      <StoreFetcher>
         <Component {...pageProps} />
-      </StoreHandler>
+      </StoreFetcher>
     </Provider>
   );
 }
 
 // fetch stuff on mount
-function StoreHandler({ children }: { children: ReactNode }) {
+function StoreFetcher({ children }: { children: ReactNode }) {
   const { fetchCheckout, createCheckout } = useStore();
 
   useEffect(() => {
