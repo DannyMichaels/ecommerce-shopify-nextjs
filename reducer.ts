@@ -37,7 +37,7 @@ export const reducer = (initialState: InitialState, preloadedState = {}) => {
       });
     },
 
-    removeLineItem: async (lineItemIdsToRemove: Array<string>) => {
+    removeLineItems: async (lineItemIdsToRemove: Array<string>) => {
       const checkout = await CheckoutService.removeLineItems(
         get().checkout.id,
         lineItemIdsToRemove

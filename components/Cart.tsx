@@ -21,12 +21,12 @@ import Link from 'next/link';
 
 export default function Cart() {
   const [isRemoving, setIsRemoving] = useState(false);
-  const { setIsCartOpen, isCartOpen, checkout, removeLineItem } = useStore(
+  const { setIsCartOpen, isCartOpen, checkout, removeLineItems } = useStore(
     (store) => ({
       setIsCartOpen: store.setIsCartOpen,
       isCartOpen: store.isCartOpen,
       checkout: store.checkout,
-      removeLineItem: store.removeLineItem,
+      removeLineItems: store.removeLineItems,
     }),
     shallow
   );
@@ -54,7 +54,7 @@ export default function Cart() {
                           if (isRemoving) return;
 
                           setIsRemoving(true);
-                          await removeLineItem(item.id);
+                          await removeLineItems([item.id as string]);
                           setIsRemoving(false);
                         }}
                       />
