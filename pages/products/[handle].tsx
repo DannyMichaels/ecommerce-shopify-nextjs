@@ -11,7 +11,6 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ product }: ProductPageProps) {
-  console.log({ product });
   return <div>{product.title}</div>;
 }
 
@@ -38,14 +37,3 @@ export async function getStaticProps({ params }: Params) {
     // revalidate: 60,
   };
 }
-
-// export async function getServerSideProps({ params }: Params) {
-//   const oneProduct = await fetchProductWithHandle(params.id);
-//   console.log('one', { oneProduct });
-//   return {
-//     props: {
-//       product: JSON.parse(JSON.stringify(oneProduct)),
-//     },
-//     // revalidate: 60,
-//   };
-// }

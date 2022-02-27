@@ -6,6 +6,11 @@ const nextConfig = {
     SHOPIFY_STOREFRONT_ACCESS_TOKEN:
       process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN,
   },
+
+  images: {
+    domains: ['cdn.shopify.com'],
+    formats: ['image/avif', 'image/webp'],
+  },
 };
 
 module.exports = nextConfig;

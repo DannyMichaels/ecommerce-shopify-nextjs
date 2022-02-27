@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { fetchAllProducts } from '../services/products.services';
 import { ProductWithHandle } from '../shopify';
 import { useStore } from '../store';
+import { Box, Text, Grid, Image as ChakraImage } from '@chakra-ui/react';
+import Image from 'next/image';
 
 interface HomeProps {
   products: ProductWithHandle[];
@@ -9,13 +11,20 @@ interface HomeProps {
 
 export default function Home({ products }: HomeProps) {
   return (
-    <div>
-      {products.map((product) => (
-        <Link key={product.id} href={`/products/${product.handle}`} passHref>
-          <p>{product.title}</p>
-        </Link>
-      ))}
-    </div>
+    <Box>
+      <Grid templateColumns="repeat(3, 1fr)">
+        {products.map((product) => (
+          <Link key={product.id} href={`/products/${product.handle}`} passHref>
+            <Box _hover={{ opacity: '80%' }} textAlign="center">
+              <ChakraImage src={product.images[0].src} alt={product.title} />
+
+              <Text>{product.title}</Text>
+              <Text>${product.variants[0].price}</Text>
+            </Box>
+          </Link>
+        ))}
+      </Grid>
+    </Box>
   );
 }
 
