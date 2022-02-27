@@ -45,7 +45,7 @@ export default function NavMenu() {
             </VStack>
           </DrawerBody>
           <DrawerFooter textAlign="center">
-            <Text w="100%">&copy; Daniel 2022</Text>
+            <Text w="100%">&copy; 2022 Daniel Michael</Text>
           </DrawerFooter>
         </DrawerContent>
       </DrawerOverlay>

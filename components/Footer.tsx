@@ -39,7 +39,7 @@ export default function Footer() {
           w="100%"
           borderTop="1px solid #fff"
           p="1rem">
-          &copy; 2022 Daniel
+          &copy; 2022 Daniel Michael
         </Text>
       </Box>
     </Box>
