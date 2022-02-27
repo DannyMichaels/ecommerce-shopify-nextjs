@@ -3,6 +3,7 @@ import { fetchAllProducts } from '../services/products.services';
 import { ProductWithHandle } from '../shopify';
 import { Box, Text, Grid } from '@chakra-ui/react';
 import Image from '../components/Image';
+import Hero from '../components/Hero';
 
 interface HomeProps {
   products: ProductWithHandle[];
@@ -11,6 +12,7 @@ interface HomeProps {
 export default function Home({ products }: HomeProps) {
   return (
     <Box>
+      <Hero />
       <Grid templateColumns="repeat(3, 1fr)">
         {products.map((product) => (
           <Link key={product.id} href={`/products/${product.handle}`} passHref>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Grid, Box, Text, Image, VStack } from '@chakra-ui/react';
+import { Grid, Box, Text, VStack } from '@chakra-ui/react';
+import Image from './Image';
 
 export default function Footer() {
   return (
@@ -9,7 +10,16 @@ export default function Footer() {
         templateColumns={['repeat(1,1fr)', 'repeat(3, 1fr)']}
         color="white"
         fontWeight="bold">
-        <Image src="/images/bombs_group_1.png " alt="bath bombs" />
+        <Image
+          src="/images/bombs_group_1.png "
+          placeholder="blur"
+          blurDataURL="/images/bombs_group_1.png"
+          alt="bath bombs"
+          layout="responsive"
+          objectFit="contain"
+          width={670}
+          height={325}
+        />
         <VStack p="2rem">
           <Link href="/">The Green Blast</Link>
           <Link href="/">The Blue Berry</Link>

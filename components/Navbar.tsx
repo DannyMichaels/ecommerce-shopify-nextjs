@@ -37,7 +37,7 @@ export default function Navbar() {
         </a>
       </Link>
 
-      <Box>
+      <Flex alignItems="center">
         <Icon
           fill="white"
           cursor="pointer"
@@ -49,7 +49,7 @@ export default function Navbar() {
         <Badge backgroundColor="#FF388D" borderRadius="50%">
           {checkout.lineItems?.length}
         </Badge>
-      </Box>
+      </Flex>
     </Flex>
   );
 }
