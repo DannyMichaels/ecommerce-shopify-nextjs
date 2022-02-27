@@ -15,7 +15,7 @@ import {
   Flex,
   Text,
   Spinner,
-  Box
+  Box,
 } from '@chakra-ui/react';
 import Image from './Image';
 import Link from 'next/link';
@@ -42,7 +42,7 @@ export default function Cart() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Your shopping cart</DrawerHeader>
 
           <DrawerBody>
             {checkout.lineItems?.length ? (
