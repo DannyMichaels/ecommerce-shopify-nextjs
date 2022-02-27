@@ -4,27 +4,20 @@ import {
   fetchAllProducts,
   fetchProductWithHandle,
 } from '../../services/products.services';
-import { ProductWithHandle } from '../../shopify';
 import Image from '../../components/Image';
 import { useStore } from '../../store';
 import shallow from 'zustand/shallow';
-
-import {
-  Box,
-  Grid,
-  Text,
-  Button,
-  Heading,
-  Flex,
-  Center,
-} from '@chakra-ui/react';
+import { Box, Grid, Text, Button, Heading, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
+import type { Product, ProductWithHandle } from '../../models/product.model';
 
 export default function ProductPage({ product }: ProductPageProps) {
   const addItemToCheckout = useStore(
     (store) => store.addItemToCheckout,
     shallow
   );
+
+  const { altText, url } = product.images.edges[0].node;
 
   return (
     <>
@@ -36,14 +29,14 @@ export default function ProductPage({ product }: ProductPageProps) {
       <Box p="2rem">
         <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']} m="auto">
           <Image
-            src={product.images[0].src}
-            alt={product.title}
+            src={url}
+            alt={altText || product.title}
             layout="responsive"
             objectFit="cover"
             width={1920}
             height={1080}
             placeholder="blur"
-            blurDataURL={product.images[0].src}
+            blurDataURL={url}
           />
 
           <Flex
@@ -53,7 +46,7 @@ export default function ProductPage({ product }: ProductPageProps) {
             px="2rem">
             <Heading pb="2rem">{product.title}</Heading>
             <Text fontWeight="bold" pb="2rem">
-              ${product.variants[0].price}
+              ${product.priceRange.minVariantPrice.amount}
             </Text>
             <Text pb="2rem" color="gray.500">
               {product.description}
@@ -77,11 +70,10 @@ export async function getStaticPaths() {
   const allProducts = await fetchAllProducts();
 
   return {
-    paths: (allProducts as ProductWithHandle[]).map(
-      ({ handle }: { handle: string }) => ({
-        params: { handle: handle.toString() },
-      })
-    ),
+    // @ts-ignore
+    paths: (allProducts as Product[]).map((product: Product) => ({
+      params: { handle: product.node.handle.toString() },
+    })),
     fallback: false,
   };
 }

@@ -1,21 +1,21 @@
 import { Fragment, useMemo } from 'react';
-import { fetchAllProducts } from '../services/products.services';
-import type { ProductWithHandle } from '../shopify';
 import { Box, Grid } from '@chakra-ui/react';
 import Hero from '../components/Hero';
 import ImageWithText from '../components/ImageWithText';
 import ProductCard from '../components/ProductCard';
 import RichText from '../components/RichText';
+import { fetchAllProducts } from '../services/products.services';
+import type { Product } from './../models/product.model';
 
 interface HomeProps {
-  products: ProductWithHandle[];
+  products: Product[];
 }
 
 export default function Home({ products }: HomeProps) {
   const CARDS = useMemo(
     () =>
-      products.map((product) => (
-        <Fragment key={product.id}>
+      products.map((product: Product) => (
+        <Fragment key={product.node.id}>
           <ProductCard product={product} />
         </Fragment>
       )),
@@ -48,14 +48,12 @@ export default function Home({ products }: HomeProps) {
   );
 }
 
-// If you build and start the app, the date returned here will have the same
-// value for all requests, as this method gets executed at build time.
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const products = await fetchAllProducts();
 
   return {
     props: {
-      products: JSON.parse(JSON.stringify(products)),
+      products,
     },
   };
 }
