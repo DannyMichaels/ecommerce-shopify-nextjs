@@ -13,4 +13,24 @@ export const fetchCheckout = async (
   return oneCheckout;
 };
 
-export const addItemToCheckout = async () => {};
+export const addLineItems = async (
+  checkoutId: string | number,
+  lineItemsToAdd: ShopifyBuy.LineItemToAdd[]
+) => {
+  const checkout = await client.checkout.addLineItems(
+    checkoutId,
+    lineItemsToAdd
+  );
+  return checkout;
+};
+
+export const removeLineItems = async (
+  checkoutId: string | number,
+  lineItemIdsToRemove: Array<string>
+): Promise<ShopifyBuy.Cart> => {
+  const checkout = await client.checkout.removeLineItems(
+    checkoutId,
+    lineItemIdsToRemove
+  );
+  return checkout;
+};

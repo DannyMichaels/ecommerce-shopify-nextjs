@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { fetchAllProducts } from '../services/products.services';
 import { ProductWithHandle } from '../shopify';
-import { useStore } from '../store';
 import { Box, Text, Grid } from '@chakra-ui/react';
 import Image from '../components/Image';
 

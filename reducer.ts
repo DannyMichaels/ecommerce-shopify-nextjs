@@ -19,10 +19,33 @@ export const reducer = (initialState: InitialState, preloadedState = {}) => {
       });
     },
 
-    addItemToCheckout: async () => {},
+    addItemToCheckout: async (variantId: string | number, quantity: number) => {
+      const lineItemsToAdd = [
+        {
+          variantId,
+          quantity,
+        },
+      ];
 
-    removeLineItem: async (lineItemIdsToRemove: Array<number>) => {
-      set({});
+      const checkout = await CheckoutService.addLineItems(
+        get().checkout.id,
+        lineItemsToAdd
+      );
+
+      set({
+        checkout,
+      });
+    },
+
+    removeLineItem: async (lineItemIdsToRemove: Array<string>) => {
+      const checkout = await CheckoutService.removeLineItems(
+        get().checkout.id,
+        lineItemIdsToRemove
+      );
+
+      set({
+        checkout,
+      });
     },
 
     fetchAllProducts: async () => {
