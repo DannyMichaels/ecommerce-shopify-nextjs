@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useStore } from '../store';
 import shallow from 'zustand/shallow';
-import { CloseIcon } from '@chakra-ui/icons/src/Close';
 import {
   Drawer,
   DrawerBody,
@@ -19,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 import Image from './Image';
 import Link from 'next/link';
+import { MdClose } from 'react-icons/md';
 
 export default function Cart() {
   const [isRemoving, setIsRemoving] = useState(false);
@@ -50,7 +50,8 @@ export default function Cart() {
                 <Grid templateColumns="repeat(4, 1fr)" gap={1} key={item.id}>
                   <Flex alignItems="center" justifyContent="center">
                     {!isRemoving ? (
-                      <CloseIcon
+                      <MdClose
+                        fontSize="1.5rem"
                         cursor="pointer"
                         onClick={async () => {
                           if (isRemoving) return;
