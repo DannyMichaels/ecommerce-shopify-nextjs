@@ -26,7 +26,7 @@ a {
   flex-grow: 1;
 }
 
-.tracking-in-expand {
+/* .tracking-in-expand {
   -webkit-animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1)
     both;
   animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
@@ -43,4 +43,4 @@ a {
   100% {
     opacity: 1;
   }
-}
+} */
