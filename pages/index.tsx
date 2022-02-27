@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { fetchAllProducts } from '../services/products.services';
 import { ProductWithHandle } from '../shopify';
 import { useStore } from '../store';
-import { Box, Text, Grid, Image as ChakraImage } from '@chakra-ui/react';
-import Image from 'next/image';
+import { Box, Text, Grid } from '@chakra-ui/react';
+import Image from '../components/Image';
 
 interface HomeProps {
   products: ProductWithHandle[];
@@ -16,7 +16,17 @@ export default function Home({ products }: HomeProps) {
         {products.map((product) => (
           <Link key={product.id} href={`/products/${product.handle}`} passHref>
             <Box _hover={{ opacity: '80%' }} textAlign="center">
-              <ChakraImage src={product.images[0].src} alt={product.title} />
+              <Image
+                src={product.images[0].src}
+                alt={product.title}
+                layout="responsive"
+                width={1920}
+                height={1080}
+                placeholder="blur"
+                objectPosition="center"
+                objectFit="cover"
+                blurDataURL={product.images[0].src}
+              />
 
               <Text>{product.title}</Text>
               <Text>${product.variants[0].price}</Text>
