@@ -6,9 +6,7 @@ import { useStore } from '../store';
 import Router from 'next/router';
 import { ChakraProvider } from '@chakra-ui/provider';
 import ProgressBar from '@badrap/bar-of-progress';
-import Navbar from '../components/Navbar';
-import Cart from '../components/Cart';
-import NavMenu from '../components/NavMenu';
+import Layout from '../components/Layout';
 
 const progress = new ProgressBar({
   size: 4,
@@ -28,10 +26,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider>
       <ZustandStoreProvider createStore={createStore}>
         <ZustandStoreFetcher>
-          <Navbar />
-          <Cart />
-          <NavMenu />
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ZustandStoreFetcher>
       </ZustandStoreProvider>
     </ChakraProvider>

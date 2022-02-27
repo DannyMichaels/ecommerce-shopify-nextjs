@@ -56,7 +56,6 @@ export const reducer = (initialState: InitialState, preloadedState = {}) => {
       });
     },
 
-    // fetch one product by "handle" aka id
     fetchProductWithHandle: async (handle: string) => {
       const oneProduct = await ProductsService.fetchProductWithHandle(handle);
       set({
@@ -65,7 +64,6 @@ export const reducer = (initialState: InitialState, preloadedState = {}) => {
     },
 
     setIsMenuOpen: (value: boolean) => {
-      console.log('setting menu', value);
       set({
         isMenuOpen: value,
       });
