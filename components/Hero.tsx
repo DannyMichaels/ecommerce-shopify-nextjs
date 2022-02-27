@@ -17,6 +17,7 @@ export default function Hero() {
         objectPosition={['top', 'center']}
       />
       <Text
+        className="tracking-in-expand"
         position="absolute"
         bottom="20%"
         w="100%"

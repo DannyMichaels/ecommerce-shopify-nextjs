@@ -7,6 +7,7 @@ import Router from 'next/router';
 import { ChakraProvider } from '@chakra-ui/provider';
 import ProgressBar from '@badrap/bar-of-progress';
 import Layout from '../components/Layout';
+import Head from 'next/head';
 
 const progress = new ProgressBar({
   size: 4,
@@ -23,14 +24,23 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const createStore = useCreateStore(pageProps.initialZustandState);
 
   return (
-    <ChakraProvider>
-      <ZustandStoreProvider createStore={createStore}>
-        <FetchCheckout />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ZustandStoreProvider>
-    </ChakraProvider>
+    <>
+      <Head>
+        <title>Bath Bombs</title>
+        <meta
+          name="description"
+          content="Introducing Bath Bombs, The relaxation you've been waiting for."
+        />
+      </Head>
+      <ChakraProvider>
+        <ZustandStoreProvider createStore={createStore}>
+          <FetchCheckout />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ZustandStoreProvider>
+      </ChakraProvider>
+    </>
   );
 }
 

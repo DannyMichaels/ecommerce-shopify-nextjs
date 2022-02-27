@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import create, { UseStore } from 'zustand';
+import create, { UseBoundStore } from 'zustand';
 import createContext from 'zustand/context';
 import { devtools } from 'zustand/middleware';
 import { reducer } from './reducer';
@@ -9,7 +9,7 @@ let store: any;
 export type InitialState = typeof initialState;
 type UseStoreState = typeof initializeStore extends (
   ...args: never
-) => UseStore<infer T>
+) => UseBoundStore<infer T>
   ? T
   : never;
 
