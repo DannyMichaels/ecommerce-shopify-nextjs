@@ -102,11 +102,9 @@ export default function Cart() {
 
           {checkout.lineItems?.length ? (
             <DrawerFooter>
-              <Button w="100%">
-                <Link w="100%" href={checkout.webUrl}>
-                  Checkout
-                </Link>
-              </Button>
+              <Link href={checkout.webUrl} passHref>
+                <Button w="100%">Checkout</Button>
+              </Link>
             </DrawerFooter>
           ) : null}
         </DrawerContent>
