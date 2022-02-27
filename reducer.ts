@@ -65,6 +65,7 @@ export const reducer = (initialState: InitialState, preloadedState = {}) => {
     },
 
     setIsMenuOpen: (value: boolean) => {
+      console.log('setting menu', value);
       set({
         isMenuOpen: value,
       });
