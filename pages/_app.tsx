@@ -25,18 +25,17 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <ZustandStoreProvider createStore={createStore}>
-        <ZustandStoreFetcher>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ZustandStoreFetcher>
+        <FetchCheckout />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ZustandStoreProvider>
     </ChakraProvider>
   );
 }
 
 // fetch stuff on mount
-function ZustandStoreFetcher({ children }: { children: ReactNode }) {
+function FetchCheckout() {
   const { fetchCheckout, createCheckout } = useStore();
 
   useEffect(() => {
@@ -49,5 +48,5 @@ function ZustandStoreFetcher({ children }: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <>{children}</>;
+  return <></>;
 }

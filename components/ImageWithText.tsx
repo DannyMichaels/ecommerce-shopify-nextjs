@@ -1,18 +1,24 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { Box, Flex, Button, Text, Image, Heading } from '@chakra-ui/react';
+
+interface ImageWithTextProps {
+  reverse?: boolean;
+  image: string;
+  heading?: string;
+  text?: string;
+}
 
 export default function ImageWithText({
   reverse,
   image,
   heading,
   text,
-}: {
-  reverse?: boolean;
-  image: string;
-  heading?: string;
-  text?: string;
-}) {
-  const reverseSection = reverse ? 'row-reverse' : 'row';
+}: ImageWithTextProps) {
+  const reverseSection = useMemo(
+    () => (reverse ? 'row-reverse' : 'row'),
+    [reverse]
+  );
+
   return (
     <Box>
       <Flex flexDir={['column', reverseSection]} w="100%">

@@ -1,41 +1,37 @@
-import Link from 'next/link';
+import { Fragment, useMemo } from 'react';
 import { fetchAllProducts } from '../services/products.services';
-import { ProductWithHandle } from '../shopify';
-import { Box, Text, Grid } from '@chakra-ui/react';
-import Image from '../components/Image';
+import type { ProductWithHandle } from '../shopify';
+import { Box, Grid } from '@chakra-ui/react';
 import Hero from '../components/Hero';
 import ImageWithText from '../components/ImageWithText';
+import ProductCard from '../components/ProductCard';
+import RichText from '../components/RichText';
 
 interface HomeProps {
   products: ProductWithHandle[];
 }
 
 export default function Home({ products }: HomeProps) {
+  const CARDS = useMemo(
+    () =>
+      products.map((product) => (
+        <Fragment key={product.id}>
+          <ProductCard product={product} />
+        </Fragment>
+      )),
+    [products]
+  );
+
   return (
     <Box>
       <Hero />
-      <Grid templateColumns="repeat(3, 1fr)">
-        {products.map((product) => (
-          <Link key={product.id} href={`/products/${product.handle}`} passHref>
-            <Box _hover={{ opacity: '80%' }} textAlign="center">
-              <Image
-                src={product.images[0].src}
-                alt={product.title}
-                layout="responsive"
-                width={1920}
-                height={1080}
-                placeholder="blur"
-                objectPosition="center"
-                objectFit="cover"
-                blurDataURL={product.images[0].src}
-              />
+      <RichText
+        heading="The relaxation you've been waiting for."
+        text="Our bath bombs guarantee a fun, relaxing and colorful night."
+      />
 
-              <Text>{product.title}</Text>
-              <Text>${product.variants[0].price}</Text>
-            </Box>
-          </Link>
-        ))}
-      </Grid>
+      <Grid templateColumns="repeat(3, 1fr)">{CARDS}</Grid>
+      <RichText heading="Treat yourself!" />
       <ImageWithText
         image="/images/premium-bath-bombs.jpg"
         heading="Heading"
