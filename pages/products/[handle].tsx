@@ -17,7 +17,7 @@ export default function ProductPage({ product }: ProductPageProps) {
     shallow
   );
 
-  const { altText, url } = product.images.edges[0].node;
+  const { altText, originalSrc } = product.images.edges[0].node;
 
   return (
     <>
@@ -29,14 +29,14 @@ export default function ProductPage({ product }: ProductPageProps) {
       <Box p="2rem">
         <Grid templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)']} m="auto">
           <Image
-            src={url}
+            src={originalSrc}
             alt={altText || product.title}
             layout="responsive"
             objectFit="cover"
             width={1920}
             height={1080}
             placeholder="blur"
-            blurDataURL={url}
+            blurDataURL={originalSrc}
           />
 
           <Flex
@@ -46,13 +46,16 @@ export default function ProductPage({ product }: ProductPageProps) {
             px="2rem">
             <Heading pb="2rem">{product.title}</Heading>
             <Text fontWeight="bold" pb="2rem">
-              ${product.priceRange.minVariantPrice.amount}
+              {/* @ts-ignore */}
+              {`$${product.variants.edges[0].node.priceV2.amount}`}
             </Text>
             <Text pb="2rem" color="gray.500">
               {product.description}
             </Text>
             <Button
-              onClick={() => addItemToCheckout(product.variants[0].id, 1)}
+              onClick={() =>
+                addItemToCheckout(product.variants.edges[0].node.id, 1)
+              }
               _hover={{ opacity: '70%' }}
               backgroundColor="#FF388D"
               w="10rem"
@@ -83,7 +86,7 @@ export async function getStaticProps({ params }: Params) {
 
   return {
     props: {
-      product: JSON.parse(JSON.stringify(oneProduct)),
+      product: oneProduct,
     },
     // revalidate: 60,
   };

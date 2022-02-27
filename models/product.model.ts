@@ -34,33 +34,86 @@ export const findAll = async () => {
   return allProducts;
 };
 
-export const findById = async (id: string): Promise<ShopifyBuy.Product> => {
+export const findByHandle = async (handle: string) => {
   const query = `
-{
-  product(id: "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0Lzc1NzM5NDY0MDA5OTY=") {
-    id
-    title
-    handle
-    priceRange {
-      minVariantPrice {
-        amount
+  {
+    productByHandle(handle: "${handle}") {
+    	collections(first: 1) {
+      	edges {
+          node {
+            products(first: 5) {
+              edges {
+                node {
+                  priceRange {
+                    minVariantPrice {
+                      amount
+                    }
+                  }
+                  handle
+                  title
+                  id
+                  totalInventory
+                  images(first: 5) {
+                    edges {
+                      node {
+                        originalSrc
+                        altText
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    	}
+      id
+      title
+      handle
+      description
+      images(first: 5) {
+        edges {
+          node {
+            originalSrc
+            altText
+          }
+        }
       }
-    }
-    images(first: 5) {
-      edges {
-        node {
-          url
-          altText
+      options {
+        name
+        values
+        id
+      }
+      variants(first: 25) {
+        edges {
+          node {
+            selectedOptions {
+              name
+              value
+            }
+            image {
+              originalSrc
+              altText
+            }
+            title
+            id
+            availableForSale
+            priceV2 {
+              amount
+            }
+          }
         }
       }
     }
-  }
-} 
-  `;
+  }`;
 
   const response = await ShopifyQuery(query);
-  console.log('findOne', response);
-  return response.data.product;
+
+  const product = response.data.productByHandle
+    ? response.data.productByHandle
+    : [];
+
+  return product;
 };
 
 // for some reason not included in default type...
@@ -80,6 +133,7 @@ export interface ProductWithHandle extends ShopifyBuy.Product {
       };
     }>;
   };
+  variants: { edges: Array<{ node: ShopifyBuy.ProductVariant }> };
 }
 
 export interface Product extends ProductWithHandle {
