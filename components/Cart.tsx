@@ -15,6 +15,7 @@ import {
   Flex,
   Text,
   Spinner,
+  Box
 } from '@chakra-ui/react';
 import Image from './Image';
 import Link from 'next/link';
@@ -36,14 +37,15 @@ export default function Cart() {
       <Drawer
         isOpen={isCartOpen}
         placement="right"
-        onClose={() => setIsCartOpen(false)}>
+        onClose={() => setIsCartOpen(false)}
+        size="sm">
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Create your account</DrawerHeader>
 
           <DrawerBody>
-            {checkout.lineItems &&
+            {checkout.lineItems?.length ? (
               checkout.lineItems.map((item) => (
                 <Grid templateColumns="repeat(4, 1fr)" gap={1} key={item.id}>
                   <Flex alignItems="center" justifyContent="center">
@@ -77,21 +79,35 @@ export default function Cart() {
                     <Text>{item.title}</Text>
                   </Flex>
 
-                  {/*  @ts-ignore */}
                   <Flex alignItems="center" justifyContent="center">
+                    {/*  @ts-ignore, shopify fix ur types... */}
                     <Text>${item.variant.price}</Text>
                   </Flex>
                 </Grid>
-              ))}
+              ))
+            ) : (
+              <Box h="100%" w="100%">
+                <Text
+                  h="100%"
+                  display="flex"
+                  flexDir="column"
+                  alignItems="center"
+                  justifyContent="center">
+                  Your cart is empty!
+                </Text>
+              </Box>
+            )}
           </DrawerBody>
 
-          <DrawerFooter>
-            <Button w="100%">
-              <Link w="100%" href={checkout.webUrl}>
-                Checkout
-              </Link>
-            </Button>
-          </DrawerFooter>
+          {checkout.lineItems?.length ? (
+            <DrawerFooter>
+              <Button w="100%">
+                <Link w="100%" href={checkout.webUrl}>
+                  Checkout
+                </Link>
+              </Button>
+            </DrawerFooter>
+          ) : null}
         </DrawerContent>
       </Drawer>
     </>
